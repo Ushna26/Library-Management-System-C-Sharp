@@ -1,0 +1,41 @@
+USE [Library]
+GO
+
+/****** Object:  Table [dbo].[Book_Issue]    Script Date: 7/1/2022 4:43:58 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[Book_Issue](
+	[Issue_Id] [int] NOT NULL,
+	[Student_Id] [int] NOT NULL,
+	[ISBN] [int] NOT NULL,
+	[Issued_Date] [date] NOT NULL,
+	[Return_Date] [date] NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[Issue_Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[Book_Issue]  WITH CHECK ADD  CONSTRAINT [FK_Book_Issue_Books] FOREIGN KEY([ISBN])
+REFERENCES [dbo].[Books] ([ISBN_Code])
+ON UPDATE CASCADE
+ON DELETE CASCADE
+GO
+
+ALTER TABLE [dbo].[Book_Issue] CHECK CONSTRAINT [FK_Book_Issue_Books]
+GO
+
+ALTER TABLE [dbo].[Book_Issue]  WITH CHECK ADD  CONSTRAINT [FK_Book_Issue_Student] FOREIGN KEY([Student_Id])
+REFERENCES [dbo].[Student] ([Student_Id])
+ON UPDATE CASCADE
+ON DELETE CASCADE
+GO
+
+ALTER TABLE [dbo].[Book_Issue] CHECK CONSTRAINT [FK_Book_Issue_Student]
+GO
+
